@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TimeTable.BL
 {
-    public class Class1
+    public  interface ILoginService
     {
+        bool CheckUser(string name, string password);
     }
 }
