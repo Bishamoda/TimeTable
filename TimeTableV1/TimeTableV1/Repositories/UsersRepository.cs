@@ -8,7 +8,7 @@ using TimeTableV1.Models;
 
 namespace TimeTableV1.Repositories
 {
-    public class UsersRepository : IUsersReposirory
+    public class UsersRepository : IUsersRepository
     {
         private readonly DBContext _dB;
         public UsersRepository(DBContext dBContext)

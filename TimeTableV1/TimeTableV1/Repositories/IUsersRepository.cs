@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TimeTableV1.Models;
 
-namespace TimeTableV1.Services
+namespace TimeTableV1.Repositories
 {
-    public interface IUsersService
+    public interface IUsersRepository
     {
         public User CreateUser(User users);
         public User UpdateUser(User users);

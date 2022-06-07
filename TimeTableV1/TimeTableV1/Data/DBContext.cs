@@ -11,8 +11,8 @@ namespace TimeTableV1.Data
 {
     public class DBContext : DbContext
     {
-        private const string ConnectionString = @"Server=(localdb)\TimeTable;Database=TimeTable;Integrated Security=True";
-        public DbSet<User> Users { get; set; }
+        private const string ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=TimeTable;Integrated Security=True";
+        public DbSet<User>? Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

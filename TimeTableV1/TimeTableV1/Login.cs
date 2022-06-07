@@ -9,33 +9,69 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeTableV1.Data;
 using TimeTableV1.Models;
-using TimeTableV1.Services;
+using TimeTableV1.Repositories;
 
 namespace TimeTableV1
 {
     public partial class Login : Form
     {
-        private readonly IUsersService _usersService;
-        public Login(IUsersService usersService)
+        private IUsersRepository? _usersRepository;
+        public Login()
         {
             InitializeComponent();
-            _usersService = usersService;
+            textBoxPassword.UseSystemPasswordChar = true;
+            _usersRepository = new UsersRepository(new DBContext());
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_Login_Click(object sender, EventArgs e)
         {
-            User user = new User();
-            user.Name = textBox1.Text;
-            user.Password = textBox2.Text;
-            user.Id = Convert.ToInt32(textBox3.Text);
-            if (user != null)
+            if (string.IsNullOrEmpty(textBoxName.Text) || string.IsNullOrEmpty(textBoxPassword.Text))
             {
-
+                MessageBox.Show("Failed to login!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show("Неудалось добавить пользователя", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _usersRepository.GetAllUsers().Where(u => u.Name == textBoxName.Text && u.Password == textBoxPassword.Text);
+
+                CreateMainForm(textBoxName.Text);
+            }
+        }
+
+        private void CreateMainForm(string name)
+        {
+            TimeTable timeTable = new TimeTable(name);
+            timeTable.Show();
+            this.Hide();
+            if (timeTable.DialogResult == DialogResult.Cancel)
+            {
+                this.Show();
+            }
+        }
+
+        private void btn_Exit_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void btn_Register_Click(object sender, EventArgs e)
+        {
+            Register register = new Register();
+            register.Show();
+            if (register.DialogResult == DialogResult.Cancel)
+                register.Close();
+            
+            this.Show();
+        }
+
+        private void checkBoxPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxPassword.Checked)
+            {
+                textBoxPassword.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                textBoxPassword.UseSystemPasswordChar = true;
             }
         }
     }
