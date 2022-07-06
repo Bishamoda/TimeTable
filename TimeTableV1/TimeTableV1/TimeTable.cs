@@ -17,5 +17,10 @@ namespace TimeTableV1
             Application.OpenForms[0].Show();
             Application.OpenForms[1].Hide();
         }
+
+        private void TimeTable_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

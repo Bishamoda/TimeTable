@@ -129,6 +129,7 @@
             this.Name = "TimeTable";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TimeTable";
+            this.Load += new System.EventHandler(this.TimeTable_Load);
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
